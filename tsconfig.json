@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext", "ES2020", "ESNext"],
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "NodeNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "baseUrl": "src",
+    "outDir": "dist",
+    "paths": {
+      "#config": ["./config/config"],
+      "#dev_config": ["./config/dev_config"],
+      "#types": ["types"],
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["dist"]
+}

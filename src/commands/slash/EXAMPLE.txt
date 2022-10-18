@@ -1,0 +1,25 @@
+import { Slash } from '@/decorators';
+
+class TestBuilder {
+  constructor() {
+    console.log('TestBuilder Constructed!');
+  }
+}
+
+@Slash({
+  data: {
+    name: 'EXAMPLE',
+    description: 'EXAMPLE',
+  },
+})
+class Command {
+  constructor() {
+    this.execute();
+  }
+
+  execute() {
+    console.log('Executed!');
+
+    new TestBuilder();
+  }
+}

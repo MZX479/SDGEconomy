@@ -1,0 +1,9 @@
+{
+  "git": {
+    "platform": "github",
+    "url": "https://github.com/lol1kn1ght/sdg-autovoice.git",
+    "pr": {
+      "target": "main"
+    }
+  }
+}
