@@ -1,6 +1,6 @@
 {
   "name": "sdg-economy",
-  "version": "0.5.0",
+  "version": "0.0.0",
   "description": "SDG discord bot. An economy version",
   "main": "dist/Main.js",
   "devDependencies": {
