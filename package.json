@@ -1,7 +1,7 @@
 {
-  "name": "sdg-autovoice",
+  "name": "sdg-economy",
   "version": "0.5.0",
-  "description": "Бот для модерации дискорд сервера EZ",
+  "description": "SDG discord bot. An economy version",
   "main": "dist/Main.js",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
@@ -12,8 +12,7 @@
     "babel-plugin-tsconfig-paths-module-resolver": "^1.0.3",
     "babel-preset-minify": "^0.5.2",
     "nodemon": "^2.0.20",
-    "typescript": "^4.9.0-dev.20220925",
-    "versionings": "^0.1.0-alfa.4"
+    "typescript": "^4.9.0-dev.20220925"
   },
   "scripts": {
     "build:dev": "rimraf dist && npx babel src --extensions .ts --out-dir dist",
