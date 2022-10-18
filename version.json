@@ -3,7 +3,7 @@
     "platform": "github",
     "url": "https://github.com/MZX479/SDGEconomy.git",
     "pr": {
-      "target": "main"
+      "target": "master"
     }
   }
 }
