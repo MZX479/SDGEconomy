@@ -1,4 +1,5 @@
 import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ObjectId } from 'mongodb';
 
 export type GuildSettingsType = {
   guild_id?: string;
@@ -23,8 +24,8 @@ export type SlashDecoratorArgsType = {
 };
 
 export type DecoratorClass<
-  T extends { new (interaction: CommandInteraction): {} }
-> = T;
+  ClassType extends { new (interaction: CommandInteraction): {} }
+> = ClassType;
 
 interface SlashDecoratorPlate {
   data?: SlashDecoratorDataType;
@@ -39,72 +40,8 @@ export type SlashLoaderCommandType = {
   payload: SlashDecoratorArgsType;
 };
 
-export type event_type = {
-  name:
-    | 'applicationCommandPermissionsUpdate'
-    | 'channelCreate'
-    | 'channelDelete'
-    | 'channelPinsUpdate'
-    | 'channelUpdate'
-    | 'debug'
-    | 'emojiCreate'
-    | 'emojiDelete'
-    | 'emojiUpdate'
-    | 'error'
-    | 'guildBanAdd'
-    | 'guildBanRemove'
-    | 'guildCreate'
-    | 'guildDelete'
-    | 'guildIntegrationsUpdate'
-    | 'guildMemberAdd'
-    | 'guildMemberAvailable'
-    | 'guildMemberRemove'
-    | 'guildMembersChunk'
-    | 'guildMemberUpdate'
-    | 'guildScheduledEventCreate'
-    | 'guildScheduledEventDelete'
-    | 'guildScheduledEventUpdate'
-    | 'guildScheduledEventUserAdd'
-    | 'guildScheduledEventUserRemove'
-    | 'guildUnavailable'
-    | 'guildUpdate'
-    | 'interactionCreate'
-    | 'invalidated'
-    | 'inviteCreate'
-    | 'inviteDelete'
-    | 'messageCreate'
-    | 'messageDelete'
-    | 'messageDeleteBulk'
-    | 'messageReactionAdd'
-    | 'messageReactionRemove'
-    | 'messageReactionRemoveAll'
-    | 'messageReactionRemoveEmoji'
-    | 'messageUpdate'
-    | 'presenceUpdate'
-    | 'ready'
-    | 'roleCreate'
-    | 'roleDelete'
-    | 'roleUpdate'
-    | 'shardDisconnect'
-    | 'shardError'
-    | 'shardReady'
-    | 'shardReconnecting'
-    | 'shardResume'
-    | 'stageInstanceCreate'
-    | 'stageInstanceDelete'
-    | 'stageInstanceUpdate'
-    | 'stickerCreate'
-    | 'stickerDelete'
-    | 'stickerUpdate'
-    | 'threadCreate'
-    | 'threadDelete'
-    | 'threadListSync'
-    | 'threadMembersUpdate'
-    | 'threadMemberUpdate'
-    | 'threadUpdate'
-    | 'typingStart'
-    | 'userUpdate'
-    | 'voiceStateUpdate'
-    | 'warn'
-    | 'webhookUpdate';
-};
+export type UserType = Partial<{
+  _id: ObjectId;
+  id: string;
+  ballance: number;
+}>;

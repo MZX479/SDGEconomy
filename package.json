@@ -37,6 +37,8 @@
     "rimraf": "^3.0.2"
   },
   "author": "loli_knight",
+  "programmers": "loli_knight, MZX479",
+  "coauthors": "Qusten~, DEDovsky1",
   "license": "ISC",
   "prettier": {
     "singleQuote": true

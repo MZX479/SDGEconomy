@@ -1,11 +1,5 @@
 import { Slash } from '@/decorators';
 
-class TestBuilder {
-  constructor() {
-    console.log('TestBuilder Constructed!');
-  }
-}
-
 @Slash({
   data: {
     name: 'EXAMPLE',

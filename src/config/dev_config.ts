@@ -5,5 +5,5 @@ export default {
     user_context: true,
   },
 
-  guild_id: '674657975264346142',
+  guild_id: '827620881529307217',
 };
