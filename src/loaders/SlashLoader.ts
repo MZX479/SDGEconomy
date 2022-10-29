@@ -27,6 +27,10 @@ class SlashBuilder {
     if (!command_to_invoke) return;
 
     new command_to_invoke.command(interaction);
+
+    setTimeout(async () => {
+      if (!interaction.replied) await interaction.deferReply();
+    }, 2000);
   }
 
   load(SlashDecorator: SlashLoaderCommandType) {

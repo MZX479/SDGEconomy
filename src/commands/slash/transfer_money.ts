@@ -36,6 +36,9 @@ class DB {
   }
 
   async _overwrite_data(amount: number, member_id: string) {
+    if (!amount || !member_id)
+      throw new Error(`${amount} or ${member_id} were not given!`);
+
     const _get_data = await this._get_data();
 
     const _member_data = await _get_data._get_data.findOne<UserType>({
@@ -175,7 +178,10 @@ class Transfer_money extends InteractionTemplate {
   }
 
   async final_response(amount: number, member_tag: string) {
-    await this.interaction.followUp({
+    if (!amount || !member_tag)
+      throw new Error(`${amount} or ${member_tag} were not given!`);
+
+    await this.send({
       embeds: [
         new EmbedBuilder()
           .setColor('#00ff00')
@@ -208,7 +214,7 @@ class Transfer_money extends InteractionTemplate {
         .setStyle(ButtonStyle.Danger),
     ];
 
-    const ask_answer = <Message>await this.interaction.followUp({
+    const ask_answer = <Message>await this.send({
       embeds: [
         new EmbedBuilder()
           .setColor('Random')

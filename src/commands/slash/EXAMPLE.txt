@@ -1,4 +1,16 @@
 import { Slash } from '@/decorators';
+import { Slash } from '@/decorators';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  CommandInteraction,
+  EmbedBuilder,
+  Message,
+} from 'discord.js';
+import { InteractionTemplate } from '@/config/templates';
+import { MongoClient } from '@/Main';
+import { SendLogs } from '@/tools/send_logs';
 
 @Slash({
   data: {
@@ -6,14 +18,3 @@ import { Slash } from '@/decorators';
     description: 'EXAMPLE',
   },
 })
-class Command {
-  constructor() {
-    this.execute();
-  }
-
-  execute() {
-    console.log('Executed!');
-
-    new TestBuilder();
-  }
-}

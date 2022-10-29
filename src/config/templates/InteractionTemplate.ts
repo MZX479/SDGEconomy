@@ -40,9 +40,11 @@ export class InteractionTemplate {
         const embed_true = this._get_true(content);
         if (!embed_true)
           throw new Error('Something went wrong while creating Embed');
-        return this._send(embed_true, options) as Promise<Message<boolean>>;
+        return this.send({ embeds: [embed_true], ...options }) as Promise<
+          Message<boolean>
+        >;
       } else if (typeof content != 'string') {
-        return this._send(content, options) as Promise<Message<boolean>>;
+        return this.send({ content, ...options }) as Promise<Message<boolean>>;
       } else {
         throw new Error("Content for embed isn't defined");
       }
@@ -88,7 +90,9 @@ export class InteractionTemplate {
       if (!embed_false)
         throw new Error('Something went wrong while creating embed');
 
-      return this._send(embed_false, options) as Promise<Message<boolean>>;
+      return this.send({ embeds: [embed_false], ...options }) as Promise<
+        Message<boolean>
+      >;
     } catch (err) {
       const error = err as Error;
       handle_error(error, '[Interaction_template] method replyFalse', {
@@ -144,28 +148,22 @@ export class InteractionTemplate {
     return new EmbedBuilder(options);
   }
 
-  private _send(embed: EmbedBuilder, options?: InteractionReplyOptions) {
+  send(options: InteractionReplyOptions) {
+    options.fetchReply = true;
     try {
       if (this._interaction.replied || this._interaction.deferred) {
-        return this._interaction
-          .editReply({
-            embeds: [embed],
-            ...options,
-          })
-          .catch((err) => err);
+        if (options?.ephemeral) {
+          if (this._interaction.ephemeral)
+            return this._interaction.editReply(options);
+          else return this._interaction.followUp(options);
+        } else return this._interaction.editReply(options).catch((err) => err);
       } else {
-        return this._interaction
-          .reply({
-            embeds: [embed],
-            ...options,
-          })
-          .catch((err) => err);
+        return this._interaction.reply(options).catch((err) => err);
       }
     } catch (err) {
       const error = err as Error;
       handle_error(error, '[Interaction_template] method replyTrue', {
         emit_data: {
-          embed,
           options,
         },
       });

@@ -21,8 +21,6 @@ class Event {
         content: ":x: This command doesn't exist",
       });
 
-    await interaction.deferReply();
-
     SlashLoader.invoke(command_data.name, interaction);
   }
 }

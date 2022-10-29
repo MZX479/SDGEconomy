@@ -45,3 +45,9 @@ export type UserType = Partial<{
   id: string;
   ballance: number;
 }>;
+
+export type CooldownsType = Partial<{
+  _id: ObjectId;
+  id: number;
+  daily_cooldown: number;
+}>;

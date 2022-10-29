@@ -21,7 +21,7 @@
     "start:dev": "npm run types && npm run build:dev && cd dist && node Main.js --dev",
     "start:production": "npm run types && npm run build:production && npm start",
     "start": "cd dist && node Main.js",
-    "dev": "nodemon --watch \"./**\" --ignore \"./dist,./node_modules\" --ext \"ts,json,.env\" --exec \"npm run start:dev\"",
+    "dev": "nodemon --watch \"./**\" --ignore \"./dist,./node_modules\" --ext \"ts,json,.env\" --exec \"npm run start:dev || exit 1\"",
     "production": "npm run start:production"
   },
   "dependencies": {
