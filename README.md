@@ -1,2 +1,2 @@
-# sdg-autovoice
-Simple Discord Guild Autovoice Bot
+# sdg-economy
+Simple Discord Guild Economy Bot
