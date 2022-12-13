@@ -152,7 +152,7 @@ class BotBuilder {
       const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
       const commands = SlashLoader.commands;
 
-      const GLOBAL = JSON.parse(process.env.GLOBAL || DEV ? 'false' : 'true');
+      const GLOBAL = JSON.parse(process.env.GLOBAL || 'false');
 
       if (GLOBAL) {
         console.log(`Pushing commands as GLOBAL`.green);
@@ -160,6 +160,12 @@ class BotBuilder {
         await rest.put(Routes.applicationCommands(client.user.id), {
           body: commands,
         });
+        await rest.put(
+          Routes.applicationGuildCommands(client.user.id, config.guild_id),
+          {
+            body: [],
+          }
+        );
       } else {
         console.log(`Pushing commands as LOCAL to ${config.guild_id}`.green);
 
@@ -169,6 +175,9 @@ class BotBuilder {
             body: commands,
           }
         );
+        await rest.put(Routes.applicationCommands(client.user.id), {
+          body: [],
+        });
       }
       console.log(`Successfully registered application commands.`);
       console.groupEnd();

@@ -1,16 +1,9 @@
 import { Slash } from '@/decorators';
-import { Slash } from '@/decorators';
 import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
   CommandInteraction,
-  EmbedBuilder,
-  Message,
 } from 'discord.js';
 import { InteractionTemplate } from '@/config/templates';
-import { MongoClient } from '@/Main';
-import { SendLogs } from '@/tools/send_logs';
+import { command_logger } from '@/tools';
 
 @Slash({
   data: {
@@ -18,3 +11,14 @@ import { SendLogs } from '@/tools/send_logs';
     description: 'EXAMPLE',
   },
 })
+
+class Example extends InteractionTemplate{
+  interaction: CommandInteraction
+  constructor(interaction: CommandInteraction) {
+    super(interaction)
+    this.interaction = interaction
+    this._main()
+  }
+
+  private async _main() {}
+}

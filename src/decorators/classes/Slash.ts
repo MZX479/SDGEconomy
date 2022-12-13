@@ -4,9 +4,9 @@ import { CommandInteraction } from 'discord.js';
 
 /** @description Setup class as Slash command */
 export function Slash(data: SlashDecoratorArgsType) {
-  return function <T extends { new (interaction: CommandInteraction): {} }>(
-    Command: T
-  ) {
+  return function <
+    Template extends { new (interaction: CommandInteraction): {} }
+  >(Command: Template) {
     const loader_args: SlashLoaderCommandType = {
       command: Command,
       payload: data,

@@ -5,7 +5,9 @@ type settings_type = {
 };
 /** @description Register class as "interactionCreate" event for bot */
 export function InteractionCreate(seetings?: settings_type) {
-  return function <T extends { new (...args: any[]): {} }>(Event: T) {
+  return function <Template extends { new (...args: any[]): {} }>(
+    Event: Template
+  ) {
     if (seetings?.once)
       client.once('interactionCreate', (...args: any) => {
         new Event(...args);

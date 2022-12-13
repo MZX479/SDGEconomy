@@ -1,4 +1,5 @@
 import { SlashLoaderCommandType } from '#types';
+import { Logger } from '@/config/logger';
 import { CommandInteraction } from 'discord.js';
 
 type mapped_type = SlashLoaderCommandType['payload']['data'];
@@ -20,16 +21,28 @@ class SlashBuilder {
   }
 
   invoke(name: string, interaction: CommandInteraction) {
+    Logger.log(
+      `Получена новая /-комманда ${name} от пользователя ${interaction.user.id} на сервере ${interaction.guild?.id}`
+    );
     const command_to_invoke = this._commands_list.filter(
       (command) => command.payload.data.name === name
     )[0];
 
-    if (!command_to_invoke) return;
+    if (!command_to_invoke)
+      return Logger.error(`/-комманда ${name} не найдена`);
 
+    Logger.log(`Найдена /-комманда ${name}`);
+    Logger.log(`Перехожу к вызову комманды`);
     new command_to_invoke.command(interaction);
 
     setTimeout(async () => {
-      if (!interaction.replied) await interaction.deferReply();
+      if (!interaction.replied) {
+        Logger.log(
+          'Ответ на комманду не последовал в первые 2 секунды, потому на нее был поставлен deferReply'
+        );
+
+        await interaction.deferReply();
+      }
     }, 2000);
   }
 

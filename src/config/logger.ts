@@ -3,7 +3,7 @@ import { readFileSync, writeFile, existsSync, mkdirSync } from 'fs';
 
 const { logger } = { logger: true };
 
-export class Logger {
+class LoggerLoader {
   private _logs_query: string[] = [];
   private _errors_query: string[] = [];
   private _warnings_query: string[] = [];
@@ -23,7 +23,9 @@ export class Logger {
   }
 
   /** @description Write error logs to file */
-  error(content: string) {
+  error(content: any) {
+    if (typeof content != 'string')
+      content = JSON.stringify(content, null, '\t');
     if (logger) console.error(content);
     const err_content = `\n${this._curr_time()} [ ERROR ]\n${this._curr_time()} ${content}\n${this._curr_time()} [ ERROR ]\n`;
     this._logs_query.push(err_content);
@@ -125,3 +127,4 @@ export class Logger {
     }
   }
 }
+export const Logger = new LoggerLoader();
