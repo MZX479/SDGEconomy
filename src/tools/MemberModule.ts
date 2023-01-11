@@ -1,5 +1,11 @@
 import { InteractionTemplate } from '@/config/templates';
-import { CommandInteraction, GuildMember } from 'discord.js';
+import {
+  Colors,
+  CommandInteraction,
+  Embed,
+  EmbedBuilder,
+  GuildMember,
+} from 'discord.js';
 import { RESTPostAPIChatInputApplicationCommandsJSONBody } from 'discord.js';
 import { handle_error } from './handle_error';
 
@@ -48,7 +54,9 @@ export async function member_module(interaction: CommandInteraction) {
     }
 
     if (!member && member_id) {
-      member = await interaction.guild!.members.fetch(member_id);
+      member = await interaction
+        .guild!.members.fetch(member_id)
+        .catch(() => undefined);
     }
     return member;
   } catch (err) {

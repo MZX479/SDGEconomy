@@ -15,7 +15,10 @@ export class Cooldowns {
   }
 
   /**@description Getting cooldowns info by user_id */
-  async _get_cooldowns_data(id: string, options?: FindOptions) {
+  async get_cooldowns_data<InputType extends cooldowns_type = cooldowns_type>(
+    id: string,
+    options?: FindOptions
+  ) {
     if (!id) throw new Error(`${id} was not taken!`);
     try {
       return this._db_collection.findOne<cooldowns_type>({ id }, options);
@@ -29,15 +32,15 @@ export class Cooldowns {
     }
   }
 
-  /**@description method which set a daily cooldown by user_id */
-  async _set_daily_cooldown(id: string, daily_cooldown: number) {
+  /**@description Sets a daily cooldown by user_id */
+  async set_daily_cooldown(id: string, daily_cooldown: number) {
     if (!id || !daily_cooldown)
       throw new Error(
-        `${id} or ${daily_cooldown} were not taken! class [Cooldowns], method [_set_daily_cooldown]`
+        `${id} or ${daily_cooldown} were not taken! class [Cooldowns], method [set_daily_cooldown]`
       );
     try {
-      const _get_cooldowns_data = await this._get_cooldowns_data(id);
-      if (!_get_cooldowns_data?.id) {
+      const get_data = await this.get_cooldowns_data(id);
+      if (!get_data?.id) {
         return this._db_collection.insertOne({
           id,
           daily_cooldown,
@@ -56,7 +59,7 @@ export class Cooldowns {
       }
     } catch (err) {
       const error = err as Error;
-      handle_error(error, 'class [Cooldowns], method [_set_daily_cooldown]', {
+      handle_error(error, 'class [Cooldowns], method [set_daily_cooldown]', {
         id,
         daily_cooldown,
       });
@@ -64,15 +67,15 @@ export class Cooldowns {
     }
   }
 
-  /**@description method which set a work cooldown by user_id*/
-  async _set_work_cooldown(id: string, work_cooldown: number) {
+  /**@description Sets a work cooldown by user_id*/
+  async set_work_cooldown(id: string, work_cooldown: number) {
     if (!id || !work_cooldown)
       throw new Error(
-        `${id} or ${work_cooldown} were not taken! class [Cooldowns], method [_set_work_cooldown]`
+        `${id} or ${work_cooldown} were not taken! class [Cooldowns], method [set_work_cooldown]`
       );
     try {
-      const _get_cooldowns_data = await this._get_cooldowns_data(id);
-      if (!_get_cooldowns_data?.id) {
+      const get_data = await this.get_cooldowns_data(id);
+      if (!get_data?.id) {
         return this._db_collection.insertOne({
           id,
           work_cooldown,
@@ -91,20 +94,20 @@ export class Cooldowns {
       }
     } catch (err) {
       const error = err as Error;
-      handle_error(error, 'class [Cooldowns], method [_set_work_cooldown]', {
+      handle_error(error, 'class [Cooldowns], method [set_work_cooldown]', {
         id,
         work_cooldown,
       });
     }
   }
 
-  /**@description method which set a rob cooldown by user_id*/
-  async _set_rob_cooldown(id: string, rob_cooldown: number) {
+  /**@description Sets a rob cooldown by user_id*/
+  async set_rob_cooldown(id: string, rob_cooldown: number) {
     if (!id || !rob_cooldown)
       throw new Error(`${id} or ${rob_cooldown} were not taken!`);
     try {
-      const _get_cooldowns_data = await this._get_cooldowns_data(id);
-      if (!_get_cooldowns_data?.id) {
+      const get_data = await this.get_cooldowns_data(id);
+      if (!get_data?.id) {
         return this._db_collection.insertOne({
           id,
           rob_cooldown,
@@ -123,9 +126,43 @@ export class Cooldowns {
       }
     } catch (err) {
       const error = err as Error;
-      handle_error(error, 'class [Cooldowns], method [_set_rob_cooldown]', {
+      handle_error(error, 'class [Cooldowns], method [set_rob_cooldown]', {
         id,
         rob_cooldown,
+      });
+    }
+  }
+
+  /**@description Sets a reputation cooldown by user id!*/
+  async set_reputation_cooldown(id: string, rep_cooldown: number) {
+    if (!id || !rep_cooldown)
+      throw new Error(
+        'Id or rep_cooldown were not given. class [Cooldowns], method [set_reputation_cooldown]'
+      );
+    try {
+      const get_data = await this.get_cooldowns_data(id);
+      if (!get_data?.id) {
+        return this._db_collection.insertOne({
+          id,
+          rep_cooldown,
+        });
+      } else {
+        return this._db_collection.updateOne(
+          {
+            id,
+          },
+          {
+            $set: {
+              rep_cooldown,
+            },
+          }
+        );
+      }
+    } catch (err) {
+      const error = err as Error;
+      handle_error(error, 'class [Cooldowns], method [set_rep_cooldown]', {
+        id,
+        rep_cooldown,
       });
     }
   }

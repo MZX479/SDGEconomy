@@ -24,7 +24,7 @@ class CooldownsInfo extends InteractionTemplate {
   private async _main() {
     const cooldowns_db = new Cooldowns(this.interaction.guild!.id);
     const cooldowns_info =
-      (await cooldowns_db._get_cooldowns_data(this.interaction.user.id)) || {};
+      (await cooldowns_db.get_cooldowns_data(this.interaction.user.id)) || {};
 
     const { daily_cooldown, rob_cooldown, work_cooldown } = cooldowns_info;
 

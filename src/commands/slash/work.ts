@@ -26,7 +26,7 @@ class Work extends InteractionTemplate {
 
     const cooldowns_db = new Cooldowns(this.interaction.guild!.id);
 
-    const author_cooldowns = await cooldowns_db._get_cooldowns_data(
+    const author_cooldowns = await cooldowns_db.get_cooldowns_data(
       this.interaction.user.id
     );
 
@@ -62,7 +62,7 @@ class Work extends InteractionTemplate {
       });
 
     await this.profile.add_money(this.interaction.user.id, work_money);
-    await cooldowns_db._set_work_cooldown(
+    await cooldowns_db.set_work_cooldown(
       this.interaction.user.id,
       new_cooldown
     );

@@ -75,6 +75,7 @@ export type user_type = Partial<{
   id: string;
   balance: number;
   inventory: inventory_type;
+  reputation: number;
 }>;
 
 export type cooldowns_type = Partial<{
@@ -83,6 +84,7 @@ export type cooldowns_type = Partial<{
   daily_cooldown: number;
   work_cooldown: number;
   rob_cooldown: number;
+  rep_cooldown: number;
 }>;
 
 export type item_type = {

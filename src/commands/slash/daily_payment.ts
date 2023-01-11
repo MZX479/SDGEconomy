@@ -27,7 +27,7 @@ class Daily extends InteractionTemplate {
 
     const cooldowns_db = new Cooldowns(this.interaction.guild!.id);
 
-    const get_cooldown = await cooldowns_db._get_cooldowns_data(
+    const get_cooldown = await cooldowns_db.get_cooldowns_data(
       this.interaction.user.id
     );
 
@@ -51,7 +51,7 @@ class Daily extends InteractionTemplate {
       `**You successfully added a \`${this.amount}\`${money_icon} to your balance.**`
     ).setColor(Colors.Green);
 
-    await cooldowns_db._set_daily_cooldown(
+    await cooldowns_db.set_daily_cooldown(
       this.interaction.user.id,
       new_cooldown
     );

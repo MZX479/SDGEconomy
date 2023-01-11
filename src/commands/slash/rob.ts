@@ -33,7 +33,7 @@ class Rob extends InteractionTemplate {
     const profile_db = new Profile(this.interaction.guild!.id);
     const author_ballance = await profile_db.balance(this.interaction.user.id);
     const cooldowns_db = new Cooldowns(this.interaction.guild!.id);
-    const get_cooldown = await cooldowns_db._get_cooldowns_data(
+    const get_cooldown = await cooldowns_db.get_cooldowns_data(
       this.interaction.user.id
     );
     const get_time = new Date().getTime();
@@ -63,10 +63,7 @@ class Rob extends InteractionTemplate {
       )}💸`
     ).setColor(Colors.Green);
     await this.send({ embeds: [get_embed] });
-    await cooldowns_db._set_rob_cooldown(
-      this.interaction.user.id,
-      new_cooldown
-    );
+    await cooldowns_db.set_rob_cooldown(this.interaction.user.id, new_cooldown);
     command_logger({
       interaction: this.interaction,
       title: 'Rob command',
